@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ── 게시글 조회 ──
 async function loadPost(session) {
   // 조회수 증가
-  await _supabase.rpc('increment_views', { post_id: Number(postId) }).catch(() => {});
+  try { await _supabase.rpc('increment_views', { post_id: Number(postId) }); } catch(e) {}
 
   const { data: post, error } = await _supabase
     .from('posts')
