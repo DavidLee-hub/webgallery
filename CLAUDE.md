@@ -106,9 +106,9 @@
 - [x] 스크롤 기능 (2026-03-27)
 
 #### 5. 반응형
-- [ ] PC (1600px~)
-- [ ] 태블릿 (768px 이하) — GNB 햄버거, 그리드 2열, 배너 세로스택
-- [ ] 모바일 (480px 이하) — 검색바 숨김, 커뮤니티 1열, 폰트 축소
+- [x] PC (1600px~) (2026-03-27)
+- [x] 태블릿 (768px 이하) — GNB 햄버거, 그리드 2열, 배너 세로스택 (2026-03-27)
+- [x] 모바일 (480px 이하) — 검색바 숨김, 커뮤니티 1열, 폰트 축소 (2026-03-27)
 
 ---
 
@@ -184,8 +184,8 @@
 - [x] 댓글 CRUD 구현 (클로드코드) (2026-03-27)
 
 #### 9단계: Vercel 배포 (수동 작업)
-- [ ] Vercel 계정 생성 (vercel.com)
-- [ ] GitHub 저장소 연결
-- [ ] 환경변수 등록 (SUPABASE_URL, SUPABASE_ANON_KEY)
-- [ ] 배포 실행 및 배포 URL 확인
-- [ ] Supabase 인증 허용 URL에 배포 URL 추가 (Authentication → URL Configuration)
+- [x] Vercel 계정 생성 (vercel.com) (2026-03-27)
+- [x] GitHub 저장소 연결 (2026-03-27)
+- [x] 환경변수 등록 (SUPABASE_URL, SUPABASE_ANON_KEY) — Vanilla JS 구조상 생략, supabase.js에 직접 작성 (2026-03-27)
+- [x] 배포 실행 및 배포 URL 확인 — https://webgallery-ashy.vercel.app (2026-03-27)
+- [x] Supabase 인증 허용 URL에 배포 URL 추가 (Authentication → URL Configuration) (2026-03-27)

@@ -214,3 +214,50 @@
   color: var(--color-primary) !important;
   font-weight: 600;
 }
+
+/* ── 반응형: 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  .board {
+    margin: 24px auto;
+  }
+
+  /* 검색바 전체 너비 */
+  .board__search-input {
+    width: 100%;
+  }
+
+  /* 번호/조회수 열 숨김 */
+  .board__col-num,
+  .board__col-views,
+  th.board__col-num,
+  th.board__col-views,
+  td.board__col-num,
+  td.board__col-views {
+    display: none;
+  }
+}
+
+/* ── 반응형: 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  .board {
+    padding: 0 12px;
+    margin: 16px auto;
+  }
+
+  /* 작성자 열도 숨김 */
+  .board__col-author,
+  th.board__col-author,
+  td.board__col-author {
+    display: none;
+  }
+
+  .board__table th,
+  .board__table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .board__search-wrap {
+    padding: 12px;
+  }
+}

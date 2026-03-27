@@ -205,3 +205,28 @@
   text-align: center;
   padding: 24px 0;
 }
+
+/* ── 반응형: 태블릿/모바일 ── */
+@media (max-width: 768px) {
+  .post {
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  .post__title { font-size: 18px; }
+
+  .comment__form {
+    flex-direction: column;
+  }
+
+  .comment__submit {
+    width: 100%;
+  }
+}

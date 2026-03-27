@@ -161,3 +161,45 @@
 .footer__grid-list li:hover {
   opacity: 0.8;
 }
+
+/* ── 반응형: 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  /* 푸터 그리드 2열 */
+  .footer__grid-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 썸네일 간격/크기 축소 */
+  .hero__thumb-list li {
+    width: 60px;
+    height: 44px;
+  }
+
+  /* 화살표 크기 축소 */
+  .hero__arrow {
+    width: 56px;
+    height: 56px;
+  }
+
+  .hero__arrow--prev { left: 8px; }
+  .hero__arrow--next { right: 8px; }
+}
+
+/* ── 반응형: 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  /* 푸터 그리드 1열 */
+  .footer__grid-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* 썸네일 숨김 (화면이 너무 좁음) */
+  .hero__thumbnails {
+    display: none;
+  }
+
+  /* 화살표 더 축소 */
+  .hero__arrow {
+    width: 40px;
+    height: 40px;
+  }
+}

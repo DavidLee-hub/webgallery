@@ -396,8 +396,92 @@ body {
   background: #2a2a2a;
 }
 
+/* ── 햄버거 버튼 (태블릿/모바일용, 기본 숨김) ── */
+.header__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #aaa;
+  transition: color 0.2s;
+}
+
+.header__hamburger:hover {
+  color: var(--color-white);
+}
+
 /* ── 푸터 공통 ── */
 .footer {
   background: #1a1a1a;
   padding: var(--spacing-lg);
+}
+
+/* ── 반응형: 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  /* 햄버거 버튼 표시 */
+  .header__hamburger { display: flex; }
+
+  /* GNB 드롭다운 */
+  .gnb { display: none; }
+  .gnb.is-open { display: block; }
+
+  .gnb__list {
+    flex-direction: column;
+    height: auto;
+    padding: 8px 0;
+  }
+
+  .gnb__link {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 var(--spacing-lg);
+    font-size: 14px;
+  }
+
+  /* 서브메뉴: hover 비활성화 → 클릭 토글로 전환 */
+  .gnb__item--has-sub:hover .gnb__sub {
+    display: none;
+  }
+
+  .gnb__sub {
+    position: static;
+    border: none;
+    background: #161616;
+    min-width: unset;
+    display: none;
+  }
+
+  .gnb__sub.is-open {
+    display: block;
+  }
+
+  .gnb__sub li a {
+    padding: 10px var(--spacing-lg);
+    padding-left: 32px;
+    font-size: 13px;
+  }
+}
+
+/* ── 반응형: 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  /* 검색바 숨김 */
+  .header__search { display: none; }
+
+  /* 로고 크기 축소 */
+  .header__logo { font-size: 15px; }
+
+  /* 폰트 크기 축소 */
+  :root {
+    --font-size-h1: 28px;
+    --font-size-h2: 22px;
+    --font-size-h3: 18px;
+    --font-size-body: 14px;
+  }
+
+  /* 모달 너비 조정 */
+  .modal {
+    width: calc(100vw - 32px);
+    padding: 28px 20px;
+  }
 }

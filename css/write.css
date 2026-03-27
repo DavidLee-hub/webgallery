@@ -183,3 +183,32 @@
 .write__submit:hover {
   opacity: 0.85;
 }
+
+/* ── 반응형: 태블릿/모바일 ── */
+@media (max-width: 768px) {
+  .write {
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .write {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  .write__actions {
+    flex-direction: column-reverse;
+  }
+
+  .write__cancel,
+  .write__submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .write__preview img {
+    max-width: 100%;
+  }
+}
