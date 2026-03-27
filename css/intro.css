@@ -1,0 +1,58 @@
+/* intro.css - 인트로 페이지 */
+
+/* ── 전체화면 레이아웃 ── */
+html, body {
+  height: 100%;
+}
+
+.intro {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 배경 이미지 영역 ── */
+.intro__bg {
+  position: absolute;
+  inset: 0;
+  background: #555;
+}
+
+/* ── 중앙 콘텐츠 ── */
+.intro__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 제목 */
+.intro__title {
+  width: 300px;
+  height: 48px;
+  background: #777;
+  border-radius: 4px;
+}
+
+/* 서브타이틀 */
+.intro__sub {
+  width: 220px;
+  height: 24px;
+  background: #777;
+  border-radius: 4px;
+}
+
+/* 갤러리 입장 버튼 */
+.intro__btn {
+  display: block;
+  width: 140px;
+  height: 44px;
+  background: #666;
+  border-radius: 4px;
+  margin-top: 8px;
+}

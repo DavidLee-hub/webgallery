@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>현준의 사진세상 - 갤러리</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="header__inner">
+
+      <!-- 로고 -->
+      <a href="gallery.html" class="header__logo"></a>
+
+      <!-- 검색바 -->
+      <div class="header__search">
+        <input type="text" class="header__search-input">
+        <button class="header__search-btn"></button>
+      </div>
+
+      <!-- Board 아이콘 -->
+      <a href="board.html" class="header__board"></a>
+
+    </div>
+
+    <!-- GNB 카테고리 -->
+    <nav class="gnb">
+      <ul class="gnb__list">
+        <li class="gnb__item"><a href="#" class="gnb__link">longexposure</a></li>
+        <li class="gnb__item gnb__item--has-sub">
+          <a href="#" class="gnb__link">series</a>
+          <ul class="gnb__sub">
+            <li><a href="#">goyang-ilsan</a></li>
+            <li><a href="#">jeju</a></li>
+          </ul>
+        </li>
+        <li class="gnb__item"><a href="#" class="gnb__link">sunrise-sunset</a></li>
+        <li class="gnb__item"><a href="#" class="gnb__link">trajectory</a></li>
+        <li class="gnb__item gnb__item--has-sub">
+          <a href="#" class="gnb__link">travel</a>
+          <ul class="gnb__sub">
+            <li><a href="#">chungcheong</a></li>
+            <li><a href="#">gangwon</a></li>
+            <li><a href="#">gyengsang</a></li>
+            <li><a href="#">incheon</a></li>
+            <li><a href="#">jeolla</a></li>
+            <li><a href="#">jeju</a></li>
+            <li><a href="#">seoul-gyenggi</a></li>
+          </ul>
+        </li>
+        <li class="gnb__item"><a href="#" class="gnb__link">typological</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 히어로 슬라이더 -->
+  <section class="hero">
+
+    <!-- 메인 이미지 -->
+    <div class="hero__slide"></div>
+
+    <!-- 좌우 화살표 -->
+    <button class="hero__arrow hero__arrow--prev"></button>
+    <button class="hero__arrow hero__arrow--next"></button>
+
+    <!-- 썸네일 strip -->
+    <div class="hero__thumbnails">
+      <ul class="hero__thumb-list"></ul>
+    </div>
+
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+
+    <!-- 전체 목록 보기 버튼 -->
+    <div class="footer__toggle">
+      <button class="footer__toggle-btn"></button>
+    </div>
+
+    <!-- 전체 사진 그리드 -->
+    <div class="footer__grid">
+      <ul class="footer__grid-list"></ul>
+    </div>
+
+  </footer>
+
+  <script src="js/gallery.js"></script>
+</body>
+</html>

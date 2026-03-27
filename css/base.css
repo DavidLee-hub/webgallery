@@ -1,0 +1,123 @@
+/* base.css - 공통 기본 스타일 */
+
+body {
+  font-family: sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+/* ── 헤더 공통 ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #222;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: #222;
+}
+
+/* 로고 */
+.header__logo {
+  display: block;
+  width: 160px;
+  height: 32px;
+  background: #444;
+}
+
+/* 검색바 */
+.header__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 24px;
+}
+
+.header__search-input {
+  flex: 1;
+  height: 36px;
+  background: #555;
+  border: none;
+  border-radius: 4px;
+}
+
+.header__search-btn {
+  width: 36px;
+  height: 36px;
+  background: #555;
+  border-radius: 4px;
+}
+
+/* Board 아이콘 */
+.header__board {
+  display: block;
+  width: 36px;
+  height: 36px;
+  background: #555;
+  border-radius: 4px;
+}
+
+/* ── GNB ── */
+.gnb {
+  background: #333;
+  border-top: 1px solid #444;
+}
+
+.gnb__list {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  height: 40px;
+  align-items: center;
+}
+
+.gnb__item {
+  position: relative;
+}
+
+.gnb__link {
+  display: block;
+  padding: 0 16px;
+  height: 40px;
+  line-height: 40px;
+  background: #333;
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* GNB 서브메뉴 */
+.gnb__sub {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #3a3a3a;
+  min-width: 140px;
+  z-index: 200;
+}
+
+.gnb__item--has-sub:hover .gnb__sub {
+  display: block;
+}
+
+.gnb__sub li a {
+  display: block;
+  padding: 10px 16px;
+  color: #aaa;
+  font-size: 12px;
+  background: #3a3a3a;
+}
+
+/* ── 푸터 공통 ── */
+.footer {
+  background: #444;
+  padding: 24px;
+}

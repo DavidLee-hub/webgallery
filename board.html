@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>현준의 사진세상 - 게시판</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="header__inner">
+
+      <!-- 로고 -->
+      <a href="gallery.html" class="header__logo"></a>
+
+      <!-- 검색바 -->
+      <div class="header__search">
+        <input type="text" class="header__search-input">
+        <button class="header__search-btn"></button>
+      </div>
+
+      <!-- Board 아이콘 -->
+      <a href="board.html" class="header__board"></a>
+
+    </div>
+
+    <!-- GNB 카테고리 -->
+    <nav class="gnb">
+      <ul class="gnb__list">
+        <li class="gnb__item"><a href="#" class="gnb__link">longexposure</a></li>
+        <li class="gnb__item gnb__item--has-sub">
+          <a href="#" class="gnb__link">series</a>
+          <ul class="gnb__sub">
+            <li><a href="#">goyang-ilsan</a></li>
+            <li><a href="#">jeju</a></li>
+          </ul>
+        </li>
+        <li class="gnb__item"><a href="#" class="gnb__link">sunrise-sunset</a></li>
+        <li class="gnb__item"><a href="#" class="gnb__link">trajectory</a></li>
+        <li class="gnb__item gnb__item--has-sub">
+          <a href="#" class="gnb__link">travel</a>
+          <ul class="gnb__sub">
+            <li><a href="#">chungcheong</a></li>
+            <li><a href="#">gangwon</a></li>
+            <li><a href="#">gyengsang</a></li>
+            <li><a href="#">incheon</a></li>
+            <li><a href="#">jeolla</a></li>
+            <li><a href="#">jeju</a></li>
+            <li><a href="#">seoul-gyenggi</a></li>
+          </ul>
+        </li>
+        <li class="gnb__item"><a href="#" class="gnb__link">typological</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 게시판 메인 -->
+  <main class="board">
+    <div class="board__inner">
+
+      <!-- 게시판 헤더: 제목 + 검색 + 글쓰기 -->
+      <div class="board__header">
+        <h2 class="board__title"></h2>
+        <div class="board__actions">
+          <div class="board__search">
+            <input type="text" class="board__search-input">
+            <button class="board__search-btn"></button>
+          </div>
+          <a href="write.html" class="board__write-btn"></a>
+        </div>
+      </div>
+
+      <!-- 게시글 목록 테이블 -->
+      <table class="board__table">
+        <thead>
+          <tr>
+            <th class="board__col-num"></th>
+            <th class="board__col-title"></th>
+            <th class="board__col-author"></th>
+            <th class="board__col-date"></th>
+            <th class="board__col-views"></th>
+          </tr>
+        </thead>
+        <tbody class="board__tbody">
+          <!-- 게시글 목록 JS로 동적 삽입 -->
+        </tbody>
+      </table>
+
+      <!-- 페이지네이션 -->
+      <div class="board__pagination">
+        <button class="pagination__prev"></button>
+        <ul class="pagination__list"></ul>
+        <button class="pagination__next"></button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+  </footer>
+
+  <script src="js/board.js"></script>
+</body>
+</html>
