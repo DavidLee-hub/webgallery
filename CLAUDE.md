@@ -183,15 +183,26 @@
 - [x] comments 테이블 생성 (수동 - Supabase) (2026-03-27)
 - [x] 댓글 CRUD 구현 (클로드코드) (2026-03-27)
 
-#### 10단계: 관리자 기능
-- [x] 관리자 계정 설정 (cslee835@gmail.com) (2026-03-27)
-- [x] 관리자 모드 토글 버튼 (헤더) (2026-03-27)
-- [x] 관리자 모드 ON: 게시판 전체 삭제, 게시글/댓글 전체 수정·삭제 (2026-03-27)
-- [x] Supabase RLS 정책 수정 (posts UPDATE/DELETE, comments DELETE) (2026-03-27)
-
 #### 9단계: Vercel 배포 (수동 작업)
 - [x] Vercel 계정 생성 (vercel.com) (2026-03-27)
 - [x] GitHub 저장소 연결 (2026-03-27)
 - [x] 환경변수 등록 (SUPABASE_URL, SUPABASE_ANON_KEY) — Vanilla JS 구조상 생략, supabase.js에 직접 작성 (2026-03-27)
 - [x] 배포 실행 및 배포 URL 확인 — https://webgallery-ashy.vercel.app (2026-03-27)
+- [x] 커스텀 도메인 연결 — https://junphoto.co.kr (2026-03-27)
 - [x] Supabase 인증 허용 URL에 배포 URL 추가 (Authentication → URL Configuration) (2026-03-27)
+
+#### 10단계: 관리자 기능
+- [x] 관리자 계정 설정 (cslee835@gmail.com) (2026-03-27)
+- [x] 관리자 로그인 시 관리자 모드 자동 활성화 (2026-03-27)
+- [x] 관리자 모드 토글 버튼 (헤더, 주황색 활성 표시) (2026-03-27)
+- [x] 관리자 모드 ON: 게시판 전체 행 삭제 버튼 (2026-03-27)
+- [x] 관리자 모드 ON: 모든 게시글 수정 버튼 표시 (2026-03-27)
+- [x] 게시글 삭제: 관리자 전용 (일반 사용자 삭제 불가) (2026-03-27)
+- [x] 관리자 모드 ON: 모든 댓글 삭제 버튼 표시 (2026-03-27)
+- [x] Supabase RLS 정책 수정 (posts UPDATE/DELETE, comments DELETE) (2026-03-27)
+- [x] 로그아웃 시 관리자 모드 자동 해제 (2026-03-27)
+
+#### 11단계: 버그 수정 및 개선
+- [x] post.js rpc().catch() → try/catch 수정 (Supabase JS v2 호환) (2026-03-27)
+- [x] 회원가입 후 이메일 인증 불필요 시 모달 자동 닫힘 (2026-03-27)
+- [x] 헤더 검색창 제거 (전체 페이지) (2026-03-27)
