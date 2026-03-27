@@ -55,6 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateAdminBtn(session) {
     if (!adminModeBtn) return;
     if (isAdmin(session)) {
+      // 관리자 로그인 시 자동으로 관리자 모드 활성화
+      if (sessionStorage.getItem('adminMode') === null) {
+        sessionStorage.setItem('adminMode', 'true');
+      }
       adminModeBtn.style.display = 'flex';
       const active = isAdminMode();
       adminModeBtn.classList.toggle('is-active', active);
