@@ -136,10 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorEl  = document.getElementById('signupError');
     errorEl.textContent = '';
 
-    const { error } = await _supabase.auth.signUp({ email, password });
+    const { data, error } = await _supabase.auth.signUp({ email, password });
     if (error) {
       errorEl.textContent = '회원가입에 실패했습니다. 다시 시도해주세요.';
+    } else if (data.session) {
+      // 이메일 인증 불필요 → 즉시 로그인 처리
+      closeModal();
     } else {
+      // 이메일 인증 필요
       errorEl.style.color = '#38a169';
       errorEl.textContent = '이메일을 확인하여 가입을 완료해주세요.';
     }
