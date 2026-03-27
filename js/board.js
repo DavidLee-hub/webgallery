@@ -16,6 +16,8 @@ async function loadPosts() {
   const tbody = document.getElementById('boardTbody');
   tbody.innerHTML = '<tr><td colspan="5" class="board__empty">불러오는 중...</td></tr>';
 
+  const { data: { session } } = await _supabase.auth.getSession();
+
   const from = (currentPage - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
@@ -37,12 +39,12 @@ async function loadPosts() {
   }
 
   totalCount = count || 0;
-  renderTable(posts);
+  renderTable(posts, session);
   renderPagination();
 }
 
 // ── 테이블 렌더링 ──
-function renderTable(posts) {
+function renderTable(posts, session) {
   const tbody = document.getElementById('boardTbody');
   tbody.innerHTML = '';
 
@@ -51,21 +53,36 @@ function renderTable(posts) {
     return;
   }
 
+  const adminActive = isAdmin(session) && isAdminMode();
+
   posts.forEach((post, idx) => {
     const num = totalCount - ((currentPage - 1) * PAGE_SIZE) - idx;
     const date = post.created_at.slice(0, 10);
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${num}</td>
+      <td class="board__col-num">${num}</td>
       <td class="board__col-title">
         <a href="post.html?id=${post.id}" class="board__post-link">${post.title}</a>
+        ${adminActive ? `<button class="board__admin-del" data-id="${post.id}">삭제</button>` : ''}
       </td>
-      <td>${post.author_name}</td>
-      <td>${date}</td>
-      <td>${post.views}</td>
+      <td class="board__col-author">${post.author_name}</td>
+      <td class="board__col-date">${date}</td>
+      <td class="board__col-views">${post.views}</td>
     `;
     tbody.appendChild(tr);
   });
+
+  // 관리자 모드 행 삭제 이벤트
+  if (adminActive) {
+    tbody.querySelectorAll('.board__admin-del').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
+        const { error } = await _supabase.from('posts').delete().eq('id', btn.dataset.id);
+        if (error) { alert('삭제에 실패했습니다.'); return; }
+        loadPosts();
+      });
+    });
+  }
 }
 
 // ── 페이지네이션 렌더링 ──

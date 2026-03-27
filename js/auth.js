@@ -6,21 +6,36 @@ function getAuthorName(email) {
   return email.split('@')[0];
 }
 
+// ── 관리자 확인 ──
+function isAdmin(session) {
+  return !!(session && session.user.email === 'cslee835@gmail.com');
+}
+
+// ── 관리자 모드 상태 확인 ──
+function isAdminMode() {
+  return sessionStorage.getItem('adminMode') === 'true';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const userBtn      = document.getElementById('userBtn');
   const modalOverlay = document.getElementById('modalOverlay');
   const modalClose   = document.getElementById('modalClose');
   const iconLogin    = userBtn.querySelector('.icon-login');
   const iconLogout   = userBtn.querySelector('.icon-logout');
+  const adminModeBtn = document.getElementById('adminModeBtn');
 
   // ── 현재 로그인 상태 확인 및 아이콘 초기화 ──
   _supabase.auth.getSession().then(({ data: { session } }) => {
     updateIcon(session);
+    updateAdminBtn(session);
   });
 
   // ── 인증 상태 변경 감지 ──
   _supabase.auth.onAuthStateChange((_event, session) => {
     updateIcon(session);
+    updateAdminBtn(session);
+    // 로그아웃 시 관리자 모드 자동 해제
+    if (!session) sessionStorage.removeItem('adminMode');
   });
 
   // ── 아이콘 전환 ──
@@ -34,6 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
       iconLogout.style.display = 'none';
       userBtn.setAttribute('aria-label', '로그인');
     }
+  }
+
+  // ── 관리자 모드 버튼 표시/상태 업데이트 ──
+  function updateAdminBtn(session) {
+    if (!adminModeBtn) return;
+    if (isAdmin(session)) {
+      adminModeBtn.style.display = 'flex';
+      const active = isAdminMode();
+      adminModeBtn.classList.toggle('is-active', active);
+      adminModeBtn.textContent = active ? '관리자 모드 ON' : '관리자 모드';
+    } else {
+      adminModeBtn.style.display = 'none';
+    }
+  }
+
+  // ── 관리자 모드 토글 ──
+  if (adminModeBtn) {
+    adminModeBtn.addEventListener('click', async () => {
+      const { data: { session } } = await _supabase.auth.getSession();
+      if (!isAdmin(session)) return;
+      sessionStorage.setItem('adminMode', !isAdminMode());
+      location.reload();
+    });
   }
 
   // ── 유저 버튼 클릭 ──

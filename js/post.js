@@ -26,7 +26,7 @@ async function loadPost(session) {
     return;
   }
 
-  const isOwner = session && session.user.id === post.user_id;
+  const isOwner = (session && session.user.id === post.user_id) || (isAdmin(session) && isAdminMode());
   const date = post.created_at.slice(0, 10);
 
   document.getElementById('postInner').innerHTML = `
@@ -119,7 +119,7 @@ function renderComments(comments, session) {
   }
 
   list.innerHTML = comments.map(c => {
-    const isOwner = session && session.user.id === c.user_id;
+    const isOwner = (session && session.user.id === c.user_id) || (isAdmin(session) && isAdminMode());
     const date = c.created_at.slice(0, 10);
     return `
       <li class="comment__item" data-id="${c.id}">
