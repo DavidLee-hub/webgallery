@@ -26,14 +26,17 @@ async function loadPost(session) {
     return;
   }
 
-  const isOwner = (session && session.user.id === post.user_id) || (isAdmin(session) && isAdminMode());
+  const isOwner = session && session.user.id === post.user_id;
+  const isAdminActive = isAdmin(session) && isAdminMode();
+  const canEdit = isOwner || isAdminActive;
+  const canDelete = isAdminActive; // 삭제는 관리자만
   const date = post.created_at.slice(0, 10);
 
   document.getElementById('postInner').innerHTML = `
-    ${isOwner ? `
+    ${(canEdit || canDelete) ? `
       <div class="post__actions">
-        <button class="post__edit-btn" id="editBtn">수정</button>
-        <button class="post__del-btn" id="delBtn">삭제</button>
+        ${canEdit ? `<button class="post__edit-btn" id="editBtn">수정</button>` : ''}
+        ${canDelete ? `<button class="post__del-btn" id="delBtn">삭제</button>` : ''}
       </div>` : ''}
 
     <div class="post__header">
@@ -65,11 +68,15 @@ async function loadPost(session) {
     </div>
   `;
 
-  // 수정/삭제 이벤트
-  if (isOwner) {
+  // 수정 이벤트 (본인 또는 관리자)
+  if (canEdit) {
     document.getElementById('editBtn').addEventListener('click', () => {
       location.href = `write.html?id=${postId}`;
     });
+  }
+
+  // 삭제 이벤트 (관리자만)
+  if (canDelete) {
     document.getElementById('delBtn').addEventListener('click', () => deletePost(post));
   }
 
