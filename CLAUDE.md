@@ -68,43 +68,42 @@
 ## 5. UI 구현 체크리스트
 
 ### 초기 설정
-- [ ] GitHub 저장소 생성 (수동 작업)
-- [ ] Git 초기화 및 GitHub 연결
-- [ ] 폴더구조 및 기본 파일 생성 (img/css/js, index/login/board.html)
-- [ ] CSS 변수 설정 (색상, 폰트, 간격)
-- [ ] reset.css / base.css 작성
-- [ ] Pretendard 폰트 import
-- [ ] 공통 컴포넌트 클래스 정의 (버튼, 뱃지, 섹션타이틀)
+- [x] GitHub 저장소 생성 (수동 작업) (2026-03-27)
+- [x] Git 초기화 및 GitHub 연결 (2026-03-27)
+- [x] 폴더구조 및 기본 파일 생성 (img/css/js, index/gallery/board.html) (2026-03-27)
+- [x] CSS 변수 설정 (색상, 폰트, 간격) (2026-03-27)
+- [x] reset.css / base.css 작성 (2026-03-27)
+- [x] Pretendard 폰트 import (2026-03-27)
+- [x] 공통 컴포넌트 클래스 정의 (버튼, 뱃지, 섹션타이틀) (2026-03-27)
 
 ### 섹션별 구현
 
 #### 1.인트로 페이지
-- [ ] photos.json에 등록된 마지막 사진을 배경 이미지로
-- [ ] 중앙에 "현준의 사진 세상 "
-                "Photography by HyenJun"
-- [ ] 갤러리 입장 버튼 추가
-- [ ] 갤러리 입장 버튼 click시 다음 페이지로 이동
+- [x] photos.json에 등록된 마지막 사진을 배경 이미지로 (2026-03-27)
+- [x] 중앙에 "현준의 사진 세상" / "Photography by HyunJun" (2026-03-27)
+- [x] 갤러리 입장 버튼 추가 (2026-03-27)
+- [x] 갤러리 입장 버튼 click시 다음 페이지로 이동 (2026-03-27)
 #### 2. 헤더
-- [ ] 로고 (현준의 사진세상 파란색)
-- [ ] 검색바 (중앙, 돋보기 아이콘)
-- [ ] 오른쪽에 Board 아이콘
-- [ ] GNB: 카테고리/longexposure/series/sunrise-sunset/trajectory/travel/typological
+- [x] 로고 (현준의 사진세상 파란색) (2026-03-27)
+- [x] 검색바 (중앙, 돋보기 아이콘) (2026-03-27)
+- [x] 오른쪽에 Board 아이콘 (2026-03-27)
+- [x] GNB: 카테고리/longexposure/series/sunrise-sunset/trajectory/travel/typological (2026-03-27)
       하위 카테고리 : . series/goyang-ilsan,  jeju
                             . travel/chungcheong, gangwon, gyengsang, incheon, jeolla, jeju, seoul-gyenggi
-- [ ] position: sticky 고정
-- [ ] 스크롤 시 하단 border/shadow 추가
-- [ ] 카테고리 Click시 해당 카테고리로 확대 화면 및 하단 썸네일 로 전환
+- [x] position: sticky 고정 (2026-03-27)
+- [x] 스크롤 시 하단 border/shadow 추가 (2026-03-27)
+- [x] 카테고리 Click시 해당 카테고리로 확대 화면 및 하단 썸네일 로 전환 (2026-03-27)
 
 #### 3. 히어로 슬라이더
-- [ ] 전체 너비 photos.json의 마지막에서 2번째 이미지 
-- [ ] 좌/우 화살표 버튼 (배경 없는 흰색 chevron, 96px)
-- [ ] 좌하단 카테고리별 썸네일 사진 배치
-- [ ] 썸네일 Click시 화면 확대
+- [x] 전체 너비 photos.json의 마지막에서 2번째 이미지 (2026-03-27)
+- [x] 좌/우 화살표 버튼 (배경 없는 흰색 chevron, 96px) (2026-03-27)
+- [x] 좌하단 카테고리별 썸네일 사진 배치 (2026-03-27)
+- [x] 썸네일 Click시 화면 확대 (2026-03-27)
 
 #### 4. 푸터
-- [ ] 전체 목록 보기 탭 중앙 배치
-- [ ] 전체 보기 Click시 하단에 전체 사진 축소판 배치
-- [ ] 스크롤 기능
+- [x] 전체 목록 보기 탭 중앙 배치 (2026-03-27)
+- [x] 전체 보기 Click시 하단에 전체 사진 축소판 배치 (2026-03-27)
+- [x] 스크롤 기능 (2026-03-27)
 
 #### 5. 반응형
 - [ ] PC (1600px~)
@@ -123,56 +122,66 @@
 ### posts 테이블 스키마
 | 컬럼 | 타입 | 설명 |
 |------|------|------|
-| id | bigint | 자동 증가 PK |
-| title | text | 제목 |
-| content | text | 내용 |
-| author_name | text | 작성자 (이메일 아이디) |
-| user_id | uuid | 작성자 auth ID |
+| id | bigint generated always as identity | 자동 증가 PK |
+| title | text not null | 제목 |
+| content | text not null | 내용 |
+| author_name | text not null | 작성자 (이메일 아이디) |
+| user_id | uuid references auth.users(id) | 작성자 auth ID |
 | image_url | text | 첨부 이미지 URL |
-| views | integer | 조회수 |
-| likes | integer | 좋아요 |
-| created_at | timestamp | 작성일 |
+| views | integer default 0 | 조회수 |
+| likes | integer default 0 | 좋아요 |
+| created_at | timestamp with time zone default now() | 작성일 |
+
+### comments 테이블 스키마
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| id | bigint generated always as identity | 자동 증가 PK |
+| post_id | bigint references posts(id) | 게시글 FK (삭제 시 cascade) |
+| user_id | uuid references auth.users(id) | 작성자 auth ID |
+| author_name | text not null | 작성자 (이메일 아이디) |
+| content | text not null | 댓글 내용 |
+| created_at | timestamp with time zone default now() | 작성일 |
 
 ### 단계별 진행
 
 #### 1단계: 게시판 UI
-- [ ] board.html 구조 + board.css 스타일
-- [ ] index.html GNB 링크 연결
-- [ ] 디자인 수정·보완
+- [x] board.html 구조 + board.css 스타일 (2026-03-27)
+- [x] gallery.html GNB 커뮤니티 링크 연결 (2026-03-27)
+- [x] 디자인 수정·보완 — 목업 데이터로 UI 완성 (2026-03-27)
 
 #### 2단계: Supabase 기본 설정
-- [ ] 계정/프로젝트 생성, API Key 설정
-- [ ] .env.local 파일 생성 및 .gitignore 등록
+- [x] 계정/프로젝트 생성, API Key 설정 (2026-03-27)
+- [x] .env.local 파일 생성 및 .gitignore 등록 (2026-03-27)
 
 #### 3단계: 로그인 기능
-- [ ] Supabase 클라이언트 초기화 (js/supabase.js)
-- [ ] 이메일 로그인/회원가입 구현
-- [ ] 헤더 프로필 아이콘 로그인 상태 연동
-- [ ] 브라우저 닫으면 자동 로그아웃 (sessionStorage)
-- [ ] 회원가입 닉네임 필드 제거
-- [ ] 작성자 이메일 아이디(@앞)로 표시
+- [x] Supabase 클라이언트 초기화 (js/supabase.js) (2026-03-27)
+- [x] 이메일 로그인/회원가입 구현 (2026-03-27)
+- [x] 헤더 프로필 아이콘 로그인 상태 연동 (2026-03-27)
+- [x] 브라우저 닫으면 자동 로그아웃 (sessionStorage) (2026-03-27)
+- [x] 회원가입 닉네임 필드 제거 (2026-03-27)
+- [x] 작성자 이메일 아이디(@앞)로 표시 (2026-03-27)
 
 #### 4단계: 데이터베이스 설정
-- [ ] posts 테이블 생성 + RLS 정책 설정
-- [ ] post-images Storage 버킷 생성 (Public)
+- [x] posts 테이블 생성 + RLS 정책 설정 (2026-03-27)
+- [x] post-images Storage 버킷 생성 (Public) (2026-03-27)
 
 #### 5단계: 게시판 CRUD
-- [ ] 목록 조회 (board.js)
-- [ ] 글 작성 (write.html + write.js)
-- [ ] 상세보기 (post.html + post.js)
-- [ ] 수정 / 삭제 (본인 글만)
+- [x] 목록 조회 (board.js) (2026-03-27)
+- [x] 글 작성 (write.html + write.js) (2026-03-27)
+- [x] 상세보기 (post.html + post.js) (2026-03-27)
+- [x] 수정 / 삭제 (본인 글만) (2026-03-27)
 
 #### 6단계: 이미지 업로드
-- [ ] 이미지 업로드 / 미리보기 / 삭제
+- [x] 이미지 업로드 / 미리보기 / 삭제 (2026-03-27)
 
 #### 7단계: 추가 기능
-- [ ] 제목 검색
-- [ ] 페이지네이션
-- [ ] 조회수 카운트
+- [x] 제목 검색 (2026-03-27)
+- [x] 페이지네이션 (2026-03-27)
+- [x] 조회수 카운트 (2026-03-27)
 
 #### 8단계: 댓글 기능
-- [ ] comments 테이블 생성 (수동 - Supabase)
-- [ ] 댓글 CRUD 구현 (클로드코드)
+- [x] comments 테이블 생성 (수동 - Supabase) (2026-03-27)
+- [x] 댓글 CRUD 구현 (클로드코드) (2026-03-27)
 
 #### 9단계: Vercel 배포 (수동 작업)
 - [ ] Vercel 계정 생성 (vercel.com)
