@@ -4,6 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>현준의 사진세상 - 갤러리</title>
+
+  <!-- SEO -->
+  <meta name="description" content="현준의 사진 세상 갤러리 — 장노출, 궤적, 시리즈, 일출·일몰, 여행 카테고리별 사진을 감상하세요.">
+  <meta name="keywords" content="사진갤러리, 풍경사진, 장노출, 궤적사진, 일출, 일몰, 여행사진, Lee Hyenjun, 현준">
+  <meta name="author" content="Lee Hyenjun">
+  <link rel="canonical" href="https://junphoto.co.kr/gallery.html">
+
+  <!-- Open Graph (SNS 공유 미리보기) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="현준의 사진세상">
+  <meta property="og:title" content="현준의 사진세상 - 갤러리">
+  <meta property="og:description" content="장노출, 궤적, 시리즈, 일출·일몰, 여행 카테고리별 사진을 감상하세요 — Photography by Lee Hyenjun">
+  <meta property="og:url" content="https://junphoto.co.kr/gallery.html">
+  <meta property="og:image" content="https://junphoto.co.kr/img/long-exposure/0H6A2467.jpg">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- 트위터 카드 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="현준의 사진세상 - 갤러리">
+  <meta name="twitter:description" content="장노출, 궤적, 시리즈, 일출·일몰, 여행 카테고리별 사진을 감상하세요 — Photography by Lee Hyenjun">
+  <meta name="twitter:image" content="https://junphoto.co.kr/img/long-exposure/0H6A2467.jpg">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/gallery.css">
@@ -97,6 +118,9 @@
         <li class="gnb__item">
           <a href="board.html" class="gnb__link gnb__link--community">커뮤니티</a>
         </li>
+        <li class="gnb__item">
+          <a href="about.html" class="gnb__link">About</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -124,7 +148,25 @@
       <ul class="hero__thumb-list"></ul>
     </div>
 
+    <!-- 공유 버튼 바 -->
+    <div class="hero__share">
+      <button class="hero__share-btn" onclick="shareCurrentPhoto()" aria-label="카카오톡 공유">
+        <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" alt="카카오톡 공유" width="22" height="22">
+        <span>카카오톡 공유</span>
+      </button>
+      <button class="hero__share-btn" onclick="copyLink()" aria-label="링크 복사">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+        <span>링크 복사</span>
+      </button>
+    </div>
+
   </section>
+
+  <!-- 링크 복사 토스트 -->
+  <div class="copy-toast" id="copyToast">링크가 복사되었습니다</div>
 
   <!-- 푸터 -->
   <footer class="footer">
@@ -173,10 +215,12 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/header.js"></script>
   <script src="js/gallery.js"></script>
+  <script src="js/kakao-share.js"></script>
   <script src="js/no-download.js"></script>
 </body>
 </html>

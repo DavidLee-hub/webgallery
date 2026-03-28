@@ -162,6 +162,42 @@
   opacity: 0.8;
 }
 
+/* ── 공유 버튼 바 ── */
+.hero__share {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.hero__share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 17px;
+  color: #fff;
+  font-family: var(--font-base);
+  font-size: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hero__share-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero__share-btn img {
+  border-radius: 50%;
+}
+
 /* ── 반응형: 태블릿 (768px 이하) ── */
 @media (max-width: 768px) {
   /* 푸터 그리드 2열 */

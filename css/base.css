@@ -445,6 +445,29 @@ body {
   padding: var(--spacing-lg);
 }
 
+/* ── 링크 복사 토스트 ── */
+.copy-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  padding: 10px 22px;
+  background: rgba(30, 30, 30, 0.92);
+  color: #fff;
+  font-size: 13px;
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.copy-toast.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ── 반응형: 태블릿 (768px 이하) ── */
 @media (max-width: 768px) {
   /* 햄버거 버튼 표시 */
