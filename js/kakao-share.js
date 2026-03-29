@@ -72,10 +72,48 @@ function copyLink(url) {
   });
 }
 
+// ── 인스타그램 공유 (모바일: 네이티브 공유 / 데스크탑: 링크 복사) ──
+function shareInstagram() {
+  const url = `${SITE_URL}/gallery.html`;
+  if (navigator.share) {
+    navigator.share({ title: '현준의 사진세상', url });
+  } else {
+    copyLink(url);
+    showCopyToast('링크 복사됨 — 인스타그램 앱에서 붙여넣기 하세요');
+  }
+}
+
+function shareInstagramAbout() {
+  const url = `${SITE_URL}/about.html`;
+  if (navigator.share) {
+    navigator.share({ title: '이현준 — Lee Hyenjun', url });
+  } else {
+    copyLink(url);
+    showCopyToast('링크 복사됨 — 인스타그램 앱에서 붙여넣기 하세요');
+  }
+}
+
+// ── 네이버 블로그 공유 ──
+function shareNaverBlog() {
+  const url = encodeURIComponent(`${SITE_URL}/gallery.html`);
+  const title = encodeURIComponent('현준의 사진세상 — Photography by Lee Hyenjun');
+  window.open(`https://share.naver.com/web/shareView?url=${url}&title=${title}`, '_blank');
+}
+
+function shareNaverBlogAbout() {
+  const url = encodeURIComponent(`${SITE_URL}/about.html`);
+  const title = encodeURIComponent('이현준 — Lee Hyenjun | 현준의 사진세상');
+  window.open(`https://share.naver.com/web/shareView?url=${url}&title=${title}`, '_blank');
+}
+
 // ── 복사 완료 토스트 ──
-function showCopyToast() {
+function showCopyToast(message) {
   const toast = document.getElementById('copyToast');
   if (!toast) return;
+  toast.textContent = message || '링크가 복사되었습니다';
   toast.classList.add('is-show');
-  setTimeout(() => toast.classList.remove('is-show'), 2200);
+  setTimeout(() => {
+    toast.classList.remove('is-show');
+    toast.textContent = '링크가 복사되었습니다'; // 기본 메시지로 복원
+  }, 2200);
 }
