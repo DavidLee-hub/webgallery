@@ -28,7 +28,7 @@ async function loadPosts() {
 
   let query = _supabase
     .from('posts')
-    .select('id, title, author_name, created_at, views', { count: 'exact' })
+    .select('id, title, author_name, created_at, views, user_id', { count: 'exact' })
     .order('created_at', { ascending: false })
     .range(from, to);
 
@@ -63,12 +63,14 @@ function renderTable(posts, session) {
   posts.forEach((post, idx) => {
     const num = totalCount - ((currentPage - 1) * PAGE_SIZE) - idx;
     const date = post.created_at.slice(0, 10);
+    const isPostOwner = session && post.user_id && session.user.id === post.user_id;
+    const showDel = adminActive || isPostOwner;
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="board__col-num">${num}</td>
       <td class="board__col-title">
         <a href="post.html?id=${post.id}" class="board__post-link">${post.title}</a>
-        ${adminActive ? `<button class="board__admin-del" data-id="${post.id}">삭제</button>` : ''}
+        ${showDel ? `<button class="board__admin-del" data-id="${post.id}">삭제</button>` : ''}
       </td>
       <td class="board__col-author">${post.author_name}</td>
       <td class="board__col-date">${date}</td>
@@ -77,17 +79,15 @@ function renderTable(posts, session) {
     tbody.appendChild(tr);
   });
 
-  // 관리자 모드 행 삭제 이벤트
-  if (adminActive) {
-    tbody.querySelectorAll('.board__admin-del').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
-        const { error } = await _supabase.from('posts').delete().eq('id', btn.dataset.id);
-        if (error) { alert('삭제에 실패했습니다.'); return; }
-        loadPosts();
-      });
+  // 삭제 이벤트 (본인 글 또는 관리자)
+  tbody.querySelectorAll('.board__admin-del').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
+      const { error } = await _supabase.from('posts').delete().eq('id', btn.dataset.id);
+      if (error) { alert('삭제에 실패했습니다.'); return; }
+      loadPosts();
     });
-  }
+  });
 }
 
 // ── 페이지네이션 렌더링 ──

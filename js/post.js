@@ -57,7 +57,7 @@ async function loadPost(session) {
   const isOwner = session && session.user.id === post.user_id;
   const isAdminActive = isAdmin(session) && isAdminMode();
   const canEdit = isOwner || isAdminActive;
-  const canDelete = isAdminActive; // 삭제는 관리자만
+  const canDelete = isOwner || isAdminActive; // 삭제는 본인 또는 관리자
   const date = post.created_at.slice(0, 10);
 
   document.getElementById('postInner').innerHTML = `
