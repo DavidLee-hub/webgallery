@@ -4,7 +4,14 @@ const postId = new URLSearchParams(location.search).get('id');
 
 async function initPage() {
   if (!postId) { location.href = 'board.html'; return; }
-  const { data: { session } } = await _supabase.auth.getSession();
+  let session = null;
+  try {
+    const { data } = await _supabase.auth.getSession();
+    session = data?.session ?? null;
+  } catch(e) {
+    console.warn('[진단] getSession 오류:', e);
+  }
+  console.log('[진단] initPage 실행, session:', session ? '로그인' : '비로그인');
   await loadPost(session);
   await loadComments(session);
 }
@@ -18,9 +25,9 @@ window.addEventListener('pageshow', (e) => {
 
 // ── 게시글 조회 ──
 async function loadPost(session) {
-  // 조회수 증가 (에러 로깅 포함)
+  // 조회수 증가
   const { error: rpcError } = await _supabase.rpc('increment_views', { post_id: Number(postId) });
-  if (rpcError) console.warn('increment_views 오류:', rpcError);
+  console.log('[진단] increment_views 결과:', rpcError ? rpcError.message : '성공');
 
   // Supabase 클라이언트 캐시 우회: native fetch로 직접 조회
   let post, error;
@@ -38,8 +45,10 @@ async function loadPost(session) {
     );
     const rows = await res.json();
     post = rows[0] || null;
+    console.log('[진단] fetch 결과, views:', post?.views);
   } catch(e) {
     error = e;
+    console.error('[진단] fetch 오류:', e);
   }
 
   if (error || !post) {
