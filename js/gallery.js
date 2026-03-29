@@ -5,23 +5,32 @@ let currentPhotos = []; // 현재 카테고리 사진 목록
 let currentIndex = 0;   // 현재 히어로에 표시 중인 사진 인덱스
 
 // ── 초기 실행 ──
-fetch('photos.json')
-  .then(res => res.json())
-  .then(photos => {
-    allPhotos = photos;
+async function initGallery() {
+  const { data, error } = await _supabase
+    .from('gallery_photos')
+    .select('*')
+    .order('sort_order', { ascending: true });
 
-    // 초기 히어로: 전체 목록 마지막에서 2번째 사진
-    const defaultPhotos = allPhotos.filter(p => p.category !== 'recent');
-    currentPhotos = defaultPhotos;
-    currentIndex = defaultPhotos.length - 2;
+  if (error || !data || !data.length) {
+    console.error('갤러리 사진 로드 실패:', error);
+    return;
+  }
 
-    renderHero(currentIndex);
-    renderThumbnails(currentPhotos, currentIndex);
-    initGnb();
-    initArrows();
-    initFooterGrid();
-  })
-  .catch(err => console.error('photos.json 로드 실패:', err));
+  allPhotos = data;
+
+  // 초기 히어로: 전체 목록 마지막에서 2번째 사진
+  const defaultPhotos = allPhotos.filter(p => p.category !== 'recent');
+  currentPhotos = defaultPhotos;
+  currentIndex = defaultPhotos.length - 2;
+
+  renderHero(currentIndex);
+  renderThumbnails(currentPhotos, currentIndex);
+  initGnb();
+  initArrows();
+  initFooterGrid();
+}
+
+initGallery();
 
 // ── GNB 클릭 이벤트 초기화 ──
 function initGnb() {

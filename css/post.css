@@ -85,6 +85,37 @@
   border-radius: var(--radius-sm);
 }
 
+/* ── 좋아요 버튼 ── */
+.post__like {
+  margin-bottom: 24px;
+}
+
+.post__like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-family: var(--font-base);
+  font-size: 14px;
+  color: #888;
+  background: #fff;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.post__like-btn:hover {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.post__like-btn.is-liked {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
 /* ── 목록 버튼 ── */
 .post__back {
   display: inline-flex;

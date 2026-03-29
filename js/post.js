@@ -83,6 +83,15 @@ async function loadPost(session) {
 
     <div class="post__content">${post.content}</div>
 
+    <div class="post__like">
+      <button class="post__like-btn${localStorage.getItem('liked_' + postId) ? ' is-liked' : ''}" id="likeBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="${localStorage.getItem('liked_' + postId) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span id="likeCount">${post.likes || 0}</span>
+      </button>
+    </div>
+
     <a href="board.html" class="post__back">목록으로</a>
 
     <div class="post__comments">
@@ -108,11 +117,30 @@ async function loadPost(session) {
     document.getElementById('delBtn').addEventListener('click', () => deletePost(post));
   }
 
+  // 좋아요 이벤트
+  document.getElementById('likeBtn').addEventListener('click', () => likePost(post.likes || 0));
+
   // 댓글 등록 이벤트 (로그인/비회원 모두)
   document.getElementById('commentSubmit').addEventListener('click', () => submitComment(session));
   document.getElementById('commentInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') submitComment(session);
   });
+}
+
+// ── 좋아요 ──
+async function likePost(currentLikes) {
+  if (localStorage.getItem(`liked_${postId}`)) {
+    alert('이미 좋아요를 눌렀습니다.');
+    return;
+  }
+  const newCount = currentLikes + 1;
+  const { error } = await _supabase.from('posts').update({ likes: newCount }).eq('id', postId);
+  if (error) return;
+  localStorage.setItem(`liked_${postId}`, '1');
+  document.getElementById('likeCount').textContent = newCount;
+  const btn = document.getElementById('likeBtn');
+  btn.classList.add('is-liked');
+  btn.querySelector('svg').setAttribute('fill', 'currentColor');
 }
 
 // ── 게시글 삭제 ──

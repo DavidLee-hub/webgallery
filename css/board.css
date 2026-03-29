@@ -126,6 +126,14 @@
 .board__col-date  { width: 100px; }
 .board__col-views { width: 64px; }
 
+/* 댓글 수 */
+.board__comment-count {
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
 /* 제목 링크 */
 .board__post-link {
   color: var(--color-text);

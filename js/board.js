@@ -28,7 +28,7 @@ async function loadPosts() {
 
   let query = _supabase
     .from('posts')
-    .select('id, title, author_name, created_at, views, user_id', { count: 'exact' })
+    .select('id, title, author_name, created_at, views, user_id, comments(count)', { count: 'exact' })
     .order('created_at', { ascending: false })
     .range(from, to);
 
@@ -65,11 +65,13 @@ function renderTable(posts, session) {
     const date = post.created_at.slice(0, 10);
     const isPostOwner = session && post.user_id && session.user.id === post.user_id;
     const showDel = adminActive || isPostOwner;
+    const commentCount = post.comments?.[0]?.count || 0;
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="board__col-num">${num}</td>
       <td class="board__col-title">
         <a href="post.html?id=${post.id}" class="board__post-link">${post.title}</a>
+        ${commentCount > 0 ? `<span class="board__comment-count">[${commentCount}]</span>` : ''}
         ${showDel ? `<button class="board__admin-del" data-id="${post.id}">삭제</button>` : ''}
       </td>
       <td class="board__col-author">${post.author_name}</td>

@@ -3,6 +3,7 @@
 // ── 이메일 @앞 추출 (작성자명으로 사용) ──
 function getAuthorName(email) {
   if (!email) return '익명';
+  if (email === 'cslee835@gmail.com') return '관리자';
   return email.split('@')[0];
 }
 

@@ -2,6 +2,7 @@
 
 let selectedFile = null;
 let existingImageUrl = null;
+let originalImageUrl = null; // 수정 모드에서 원본 이미지 URL 보관 (교체 시 Storage 삭제용)
 const editId = new URLSearchParams(location.search).get('id'); // 수정 모드 시 id 존재
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -48,7 +49,8 @@ async function loadPostData(session) {
 
   if (post.image_url) {
     existingImageUrl = post.image_url;
-    document.getElementById('uploadName').textContent = '기존 이미지 있음';
+    originalImageUrl = post.image_url; // 원본 URL 별도 보관
+    document.getElementById('uploadName').textContent = '기존 이미지 있음 (변경하려면 새 파일 선택)';
     document.getElementById('previewImg').src = post.image_url;
     document.getElementById('previewWrap').style.display = 'block';
   }
@@ -120,6 +122,12 @@ function initForm(session) {
 
     // 로그인 사용자만 이미지 업로드 가능
     if (selectedFile && session) {
+      // 수정 모드에서 기존 이미지가 있으면 Storage에서 먼저 삭제
+      if (editId && originalImageUrl && originalImageUrl.includes('post-images')) {
+        const oldFileName = decodeURIComponent(originalImageUrl.split('/').pop());
+        await _supabase.storage.from('post-images').remove([oldFileName]);
+      }
+
       const ext      = selectedFile.name.split('.').pop();
       const fileName = `${session.user.id}_${Date.now()}.${ext}`;
       const { error: uploadError } = await _supabase.storage
@@ -130,6 +138,12 @@ function initForm(session) {
 
       const { data } = _supabase.storage.from('post-images').getPublicUrl(fileName);
       image_url = data.publicUrl;
+    }
+
+    // 수정 모드에서 이미지를 삭제(previewDel)한 경우 Storage에서도 삭제
+    if (editId && originalImageUrl && !image_url && originalImageUrl.includes('post-images')) {
+      const oldFileName = decodeURIComponent(originalImageUrl.split('/').pop());
+      await _supabase.storage.from('post-images').remove([oldFileName]);
     }
 
     if (editId) {

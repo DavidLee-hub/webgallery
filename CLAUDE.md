@@ -217,3 +217,8 @@
 - [x] Edge Tracking Prevention sessionStorage 폴백 처리 (supabase.js) (2026-03-29)
 - [x] JS 캐시 버스팅 ?v=3 업데이트 — Vercel CDN 캐시 강제 무효화 (2026-03-29)
 - [x] 일반 회원 본인 게시글 삭제 권한 추가 (board.js, post.js, Supabase RLS) (2026-03-29)
+- [x] 관리자 작성자명 "관리자"로 표시 (auth.js getAuthorName + Supabase DB UPDATE) (2026-03-30)
+- [x] 좋아요 기능 구현 (post.js + post.css, localStorage 중복 방지) (2026-03-30)
+- [x] 댓글 수 목록 표시 (board.js comments(count) 조인 + board.css) (2026-03-30)
+- [x] 게시글 수정 시 이미지 교체·삭제 Storage 파일 정리 (write.js) (2026-03-30)
+- [x] 갤러리 사진 관리 UI — admin.html/admin.js/admin.css, gallery.js Supabase 전환 (2026-03-30)
