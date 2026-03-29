@@ -212,3 +212,4 @@
 - [x] 전체 페이지 GNB에 About 링크 추가 (2026-03-29)
 - [x] 카카오톡 공유 버튼 추가 (갤러리 히어로, About 페이지) + 링크 복사 기능 (2026-03-29)
 - [x] 비회원 글쓰기/댓글 허용 — 닉네임 입력 방식, Supabase RLS INSERT anon 허용 (2026-03-29)
+- [x] 조회수 bfcache 버그 수정 — pageshow 이벤트 추가 + fetch cache: no-store (2026-03-29)

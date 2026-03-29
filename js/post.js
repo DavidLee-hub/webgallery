@@ -2,24 +2,45 @@
 
 const postId = new URLSearchParams(location.search).get('id');
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function initPage() {
   if (!postId) { location.href = 'board.html'; return; }
-
   const { data: { session } } = await _supabase.auth.getSession();
   await loadPost(session);
   await loadComments(session);
+}
+
+document.addEventListener('DOMContentLoaded', initPage);
+
+// bfcache 복원 시에도 재초기화 (뒤로가기 후 재진입 케이스)
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) initPage();
 });
 
 // ── 게시글 조회 ──
 async function loadPost(session) {
-  // 조회수 증가
-  try { await _supabase.rpc('increment_views', { post_id: Number(postId) }); } catch(e) {}
+  // 조회수 증가 (에러 로깅 포함)
+  const { error: rpcError } = await _supabase.rpc('increment_views', { post_id: Number(postId) });
+  if (rpcError) console.warn('increment_views 오류:', rpcError);
 
-  const { data: post, error } = await _supabase
-    .from('posts')
-    .select('*')
-    .eq('id', postId)
-    .single();
+  // Supabase 클라이언트 캐시 우회: native fetch로 직접 조회
+  let post, error;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/posts?id=eq.${postId}&select=*&limit=1`,
+      {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Accept': 'application/json'
+        },
+        cache: 'no-store'
+      }
+    );
+    const rows = await res.json();
+    post = rows[0] || null;
+  } catch(e) {
+    error = e;
+  }
 
   if (error || !post) {
     document.getElementById('postInner').innerHTML = '<p style="text-align:center;padding:60px 0;color:#aaa;">게시글을 찾을 수 없습니다.</p>';
