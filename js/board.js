@@ -130,13 +130,7 @@ function initSearch() {
   });
 }
 
-// ── 글쓰기 버튼: 비로그인 시 숨김 ──
+// ── 글쓰기 버튼: 항상 표시 (비회원도 글쓰기 가능) ──
 function initWriteBtn() {
-  const writeBtn = document.getElementById('writeBtn');
-  _supabase.auth.getSession().then(({ data: { session } }) => {
-    writeBtn.style.display = session ? 'inline-flex' : 'none';
-  });
-  _supabase.auth.onAuthStateChange((_e, session) => {
-    writeBtn.style.display = session ? 'inline-flex' : 'none';
-  });
+  // 별도 처리 없이 버튼은 항상 표시
 }

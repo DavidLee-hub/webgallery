@@ -91,6 +91,12 @@
 
       <form class="write__form" id="writeForm">
 
+        <!-- 비회원 닉네임 (비로그인 시 표시) -->
+        <div class="write__field" id="guestNameField" style="display:none">
+          <label class="write__label" for="guestName">닉네임 <span style="color:#e07b54">*</span></label>
+          <input type="text" id="guestName" class="write__input" placeholder="닉네임을 입력하세요" maxlength="20">
+        </div>
+
         <!-- 제목 -->
         <div class="write__field">
           <label class="write__label" for="postTitle">제목</label>

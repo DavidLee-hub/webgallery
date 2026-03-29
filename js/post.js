@@ -59,11 +59,11 @@ async function loadPost(session) {
 
     <div class="post__comments">
       <h3 class="post__comments-title">댓글</h3>
-      ${session ? `
-        <div class="comment__form">
-          <input type="text" class="comment__input" id="commentInput" placeholder="댓글을 입력하세요">
-          <button class="comment__submit" id="commentSubmit">등록</button>
-        </div>` : '<p class="comment__empty">댓글을 작성하려면 로그인하세요.</p>'}
+      <div class="comment__form">
+        ${!session ? `<input type="text" class="comment__input comment__input--name" id="commentAuthor" placeholder="닉네임">` : ''}
+        <input type="text" class="comment__input" id="commentInput" placeholder="댓글을 입력하세요">
+        <button class="comment__submit" id="commentSubmit">등록</button>
+      </div>
       <ul class="comment__list" id="commentList"></ul>
     </div>
   `;
@@ -80,13 +80,11 @@ async function loadPost(session) {
     document.getElementById('delBtn').addEventListener('click', () => deletePost(post));
   }
 
-  // 댓글 등록 이벤트
-  if (session) {
-    document.getElementById('commentSubmit').addEventListener('click', () => submitComment(session));
-    document.getElementById('commentInput').addEventListener('keydown', e => {
-      if (e.key === 'Enter') submitComment(session);
-    });
-  }
+  // 댓글 등록 이벤트 (로그인/비회원 모두)
+  document.getElementById('commentSubmit').addEventListener('click', () => submitComment(session));
+  document.getElementById('commentInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitComment(session);
+  });
 }
 
 // ── 게시글 삭제 ──
@@ -153,10 +151,22 @@ async function submitComment(session) {
   const content = input.value.trim();
   if (!content) return;
 
+  // 작성자명: 로그인 시 이메일 아이디, 비회원 시 입력한 닉네임
+  let authorName, userId;
+  if (session) {
+    authorName = getAuthorName(session.user.email);
+    userId = session.user.id;
+  } else {
+    const authorInput = document.getElementById('commentAuthor');
+    authorName = authorInput ? authorInput.value.trim() : '익명';
+    if (!authorName) { alert('닉네임을 입력해주세요.'); authorInput.focus(); return; }
+    userId = null;
+  }
+
   const { error } = await _supabase.from('comments').insert({
     post_id: Number(postId),
-    user_id: session.user.id,
-    author_name: getAuthorName(session.user.email),
+    user_id: userId,
+    author_name: authorName,
     content
   });
 

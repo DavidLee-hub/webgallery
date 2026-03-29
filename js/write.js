@@ -6,17 +6,23 @@ const editId = new URLSearchParams(location.search).get('id'); // 수정 모드 
 
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { session } } = await _supabase.auth.getSession();
-  if (!session) {
-    alert('로그인이 필요합니다.');
-    location.href = 'board.html';
-    return;
-  }
 
-  // 수정 모드: 기존 데이터 로드
+  // 수정 모드: 로그인 필수
   if (editId) {
+    if (!session) {
+      alert('로그인이 필요합니다.');
+      location.href = 'board.html';
+      return;
+    }
     document.querySelector('.write__title').textContent = '글 수정';
     document.querySelector('.write__submit').textContent = '수정';
     await loadPostData(session);
+  }
+
+  // 비로그인 시 닉네임 필드 표시, 이미지 업로드 숨김
+  if (!session) {
+    document.getElementById('guestNameField').style.display = 'block';
+    document.querySelector('.write__field:has(#uploadBtn)').style.display = 'none';
   }
 
   initImageUpload();
@@ -56,6 +62,8 @@ function initImageUpload() {
   const previewWrap = document.getElementById('previewWrap');
   const previewImg  = document.getElementById('previewImg');
   const previewDel  = document.getElementById('previewDel');
+
+  if (!uploadBtn) return;
 
   uploadBtn.addEventListener('click', () => postImage.click());
 
@@ -98,10 +106,20 @@ function initForm(session) {
     if (!title)   { errorEl.textContent = '제목을 입력해주세요.'; return; }
     if (!content) { errorEl.textContent = '내용을 입력해주세요.'; return; }
 
+    // 닉네임 (비회원)
+    let authorName;
+    if (session) {
+      authorName = getAuthorName(session.user.email);
+    } else {
+      const guestName = document.getElementById('guestName').value.trim();
+      if (!guestName) { errorEl.textContent = '닉네임을 입력해주세요.'; return; }
+      authorName = guestName;
+    }
+
     let image_url = existingImageUrl;
 
-    // 새 이미지 업로드
-    if (selectedFile) {
+    // 로그인 사용자만 이미지 업로드 가능
+    if (selectedFile && session) {
       const ext      = selectedFile.name.split('.').pop();
       const fileName = `${session.user.id}_${Date.now()}.${ext}`;
       const { error: uploadError } = await _supabase.storage
@@ -115,19 +133,19 @@ function initForm(session) {
     }
 
     if (editId) {
-      // 수정
+      // 수정 (로그인 사용자만)
       const { error } = await _supabase.from('posts')
         .update({ title, content, image_url })
         .eq('id', editId);
       if (error) { errorEl.textContent = '수정에 실패했습니다.'; return; }
       location.href = `post.html?id=${editId}`;
     } else {
-      // 신규 등록
+      // 신규 등록 (비회원 가능)
       const { error } = await _supabase.from('posts').insert({
         title,
         content,
-        author_name: getAuthorName(session.user.email),
-        user_id: session.user.id,
+        author_name: authorName,
+        user_id: session ? session.user.id : null,
         image_url
       });
       if (error) { errorEl.textContent = '게시글 등록에 실패했습니다.'; return; }

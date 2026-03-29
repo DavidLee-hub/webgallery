@@ -135,6 +135,11 @@
 
 .comment__input:focus { border-color: var(--color-secondary); }
 
+/* 비회원 닉네임 입력 필드 */
+.comment__input--name {
+  flex: 0 0 120px;
+}
+
 .comment__submit {
   height: 44px;
   padding: 0 20px;
