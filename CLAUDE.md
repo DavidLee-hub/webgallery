@@ -222,3 +222,4 @@
 - [x] 댓글 수 목록 표시 (board.js comments(count) 조인 + board.css) (2026-03-30)
 - [x] 게시글 수정 시 이미지 교체·삭제 Storage 파일 정리 (write.js) (2026-03-30)
 - [x] 갤러리 사진 관리 UI — admin.html/admin.js/admin.css, gallery.js Supabase 전환 (2026-03-30)
+- [x] 인트로 배경 이미지 gallery_photos 테이블 전환 (intro.js, index.html) (2026-03-30)
