@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initWriteBtn();
 });
 
+// bfcache 복원 시 목록 새로고침 (게시글 보고 뒤로가기 시 조회수 갱신)
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) loadPosts();
+});
+
 // ── 게시글 목록 로드 ──
 async function loadPosts() {
   const tbody = document.getElementById('boardTbody');
