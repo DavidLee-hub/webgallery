@@ -107,10 +107,10 @@ function initFooterGrid() {
     const li = document.createElement('li');
     li.style.backgroundImage = `url('${photo.path}')`;
 
-    // 클릭 시 히어로로 이동
+    // 클릭 시 히어로로 이동 (전체 목록 기준으로 순환)
     li.addEventListener('click', () => {
-      currentPhotos = filterPhotos(photo.category, photo.subcategory);
-      currentIndex = currentPhotos.findIndex(p => p.id === photo.id);
+      currentPhotos = allVisible;
+      currentIndex = allVisible.findIndex(p => p.id === photo.id);
       renderHero(currentIndex);
       renderThumbnails(currentPhotos, currentIndex);
       window.scrollTo({ top: 0, behavior: 'smooth' });
