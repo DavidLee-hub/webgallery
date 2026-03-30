@@ -135,6 +135,12 @@
     <!-- 메인 이미지 -->
     <div class="hero__slide"></div>
 
+    <!-- 초기 로딩 표시 -->
+    <div class="hero__loading" id="heroLoading">Loading…</div>
+
+    <!-- 사진 카운터 -->
+    <div class="hero__counter" id="heroCounter"></div>
+
     <!-- 좌우 화살표 -->
     <button class="hero__arrow hero__arrow--prev" aria-label="이전 사진">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -147,12 +153,12 @@
       </svg>
     </button>
 
-    <!-- 썸네일 strip -->
+    <!-- 썸네일 (좌측 세로 배열) -->
     <div class="hero__thumbnails">
       <ul class="hero__thumb-list"></ul>
     </div>
 
-    <!-- 공유 버튼 바 -->
+    <!-- SNS 공유 버튼 (우측 세로 배열) -->
     <div class="hero__share">
       <button class="hero__share-btn" onclick="shareCurrentPhoto()" aria-label="카카오톡 공유">
         <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" alt="카카오톡 공유" width="22" height="22">

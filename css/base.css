@@ -237,7 +237,8 @@ body {
 }
 
 .modal {
-  background: #fff;
+  background: #222;
+  border: 1px solid #333;
   border-radius: var(--radius-md);
   padding: 36px 32px;
   width: 360px;
@@ -253,25 +254,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #aaa;
+  color: #666;
   font-size: 20px;
   cursor: pointer;
   transition: color 0.2s;
 }
 
-.modal__close:hover { color: #333; }
+.modal__close:hover { color: #fff; }
 
 .modal__title {
   font-size: 20px;
   font-weight: 700;
-  color: var(--color-text);
+  color: #e0e0e0;
   margin-bottom: 24px;
   text-align: center;
 }
 
 .modal__tabs {
   display: flex;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #3a3a3a;
   margin-bottom: 24px;
 }
 
@@ -281,7 +282,7 @@ body {
   font-family: var(--font-base);
   font-size: 14px;
   font-weight: 600;
-  color: #aaa;
+  color: #666;
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: color 0.2s, border-color 0.2s;
@@ -301,12 +302,18 @@ body {
 .modal__form input {
   height: 44px;
   padding: 0 var(--spacing-md);
-  border: 1px solid #ddd;
+  background: #2e2e2e;
+  border: 1px solid #3a3a3a;
   border-radius: var(--radius-sm);
   font-family: var(--font-base);
   font-size: 14px;
+  color: #e0e0e0;
   outline: none;
   transition: border-color 0.2s;
+}
+
+.modal__form input::placeholder {
+  color: #555;
 }
 
 .modal__form input:focus {
@@ -357,7 +364,7 @@ body {
   padding: 0 var(--spacing-md);
   height: var(--gnb-height);
   line-height: var(--gnb-height);
-  color: #888;
+  color: #aaa;
   font-size: var(--font-size-small);
   transition: color 0.2s;
 }
@@ -368,7 +375,10 @@ body {
 
 /* GNB 서브메뉴 */
 .gnb__sub {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
   position: absolute;
   top: var(--gnb-height);
   left: 0;
@@ -380,13 +390,15 @@ body {
 }
 
 .gnb__item--has-sub:hover .gnb__sub {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .gnb__sub li a {
   display: block;
   padding: 10px var(--spacing-md);
-  color: #888;
+  color: #aaa;
   font-size: 12px;
   transition: color 0.2s, background 0.2s;
 }
@@ -492,7 +504,9 @@ body {
 
   /* 서브메뉴: hover 비활성화 → 클릭 토글로 전환 */
   .gnb__item--has-sub:hover .gnb__sub {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: none;
   }
 
   .gnb__sub {
@@ -500,6 +514,10 @@ body {
     border: none;
     background: #161616;
     min-width: unset;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
     display: none;
   }
 
