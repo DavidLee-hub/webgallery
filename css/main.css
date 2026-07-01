@@ -207,6 +207,7 @@ body {
 .contents--photo .contents__inner {
   flex-direction: column;
   gap: 30px;
+  max-width: 1600px;
 }
 .photo-shot-contents {
   width: 100%;
