@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/about.html", "destination": "/", "permanent": true },
+    { "source": "/gallery.html", "destination": "https://gallery.junphoto.co.kr/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.html",
