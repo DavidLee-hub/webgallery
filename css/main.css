@@ -241,7 +241,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: justify;
+  text-align: center;
   line-height: 2.4;
 }
 .photo-shot-contents-text .area-label {
