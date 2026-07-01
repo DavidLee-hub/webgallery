@@ -98,7 +98,7 @@ body {
 
 /* ================== MAIN-VISUAL (600px / inner 540px) ================== */
 .main-visual {
-  height: 860px;
+  height: 700px;
   background: var(--area-2);
   display: flex;
   align-items: center;
