@@ -1,0 +1,11 @@
+{
+  "name": "junphoto-main-site-tools",
+  "private": true,
+  "description": "정적 포트폴리오 사이트 관리용 일회성 스크립트 (사이트 자체는 빌드 불필요)",
+  "scripts": {
+    "resize-images": "node scripts/resize-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

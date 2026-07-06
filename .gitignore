@@ -1,0 +1,9 @@
+# 리사이즈 스크립트 의존성 (커밋 제외)
+node_modules/
+
+# 리사이즈 전 원본 백업 (용량이 커서 git에 올리지 않음, 로컬에만 보관)
+img-originals-backup/
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
