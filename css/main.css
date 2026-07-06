@@ -34,7 +34,7 @@ body {
   width: 100%;
   z-index: 100;
   height: var(--header-h);
-  -background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
   border-bottom:1px solid rgba(255,255,255,0.6);
   backdrop-filter: blur(10px);
   display: flex;
@@ -98,18 +98,10 @@ body {
   text-decoration: underline;
   text-decoration-thickness: 1px;
 }
-.sns {
-  display: flex;
-  gap: 18px;
-  align-items: center;  
-  padding: 12px 22px;
+.gnb a.active {
+  text-decoration: underline;
+  font-weight: 600;
 }
-.sns a {
-  color: var(--ink);
-  font-size: 18px;
-  text-decoration: none;
-}
-
 /* ================== MAIN-VISUAL (600px / inner 540px) ================== */
 .main-visual {
   height: 700px;

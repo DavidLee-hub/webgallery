@@ -16,26 +16,6 @@
   padding: 0 40px;
 }
 
-.projects__header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.projects__title {
-  font-size: 36px;
-  font-weight: 300;
-  letter-spacing: 6px;
-  color: #fff;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.projects__subtitle {
-  font-size: 14px;
-  color: #888;
-  letter-spacing: 2px;
-}
-
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -113,67 +93,6 @@
   text-transform: uppercase;
 }
 
-/* ---- New-Project ---- */
-.project-card--add {
-  border: 2px dashed #333;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 340px;
-  cursor: pointer;
-  transition: border-color .4s, background .4s;
-}
-
-.project-card--add:hover {
-  border-color: #666;
-  background: rgba(255, 255, 255, .03);
-  transform: translateY(-6px);
-}
-
-.project-card__add-content {
-  text-align: center;
-  padding: 40px;
-}
-
-.project-card__add-icon {
-  width: 64px;
-  height: 64px;
-  border: 2px solid #444;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 28px;
-  color: #555;
-  transition: border-color .4s, color .4s;
-}
-
-.project-card--add:hover .project-card__add-icon {
-  border-color: #888;
-  color: #aaa;
-}
-
-.project-card__add-label {
-  font-size: 14px;
-  color: #555;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: color .4s;
-}
-
-.project-card--add:hover .project-card__add-label {
-  color: #888;
-}
-
-.project-card__add-hint {
-  font-size: 11px;
-  color: #444;
-  letter-spacing: 1px;
-  margin-top: 8px;
-}
-
 /* ===================== 반응형 ===================== */
 @media (max-width: 1100px) {
   .projects__grid {
@@ -189,15 +108,8 @@
   .projects__inner {
     padding: 0 16px;
   }
-  .projects__title {
-    font-size: 24px;
-    letter-spacing: 4px;
-  }
   .projects__grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-  .projects__header {
-    margin-bottom: 36px;
   }
 }

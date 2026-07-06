@@ -220,12 +220,6 @@
   background: #fff;
 }
 
-/* ---- gnb active 상태 ---- */
-.gnb a.active {
-  text-decoration: underline;
-  font-weight: 600;
-}
-
 /* ===================== 반응형 ===================== */
 @media (max-width: 1100px) {
   .works__inner {
