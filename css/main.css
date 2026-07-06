@@ -34,7 +34,8 @@ body {
   width: 100%;
   z-index: 100;
   height: var(--header-h);
-  background-color: rgba(255, 255, 255, 0.6);
+  -background-color: rgba(255, 255, 255, 0.6);
+  border-bottom:1px solid rgba(255,255,255,0.6);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -69,14 +70,27 @@ body {
 .gnb ul {
   list-style: none;
   display: flex;
-  gap: 28px; 
+  gap: 56px;
   padding: 14px 36px;
+}
+.gnb ul li:not(:last-child) {
+  position: relative;
+}
+.gnb ul li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.3);
 }
 .gnb a {
   text-decoration: none;
-  color: var(--ink);
+  color: #111;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -147,7 +161,7 @@ body {
 
 /* ================== CONTENTS 공통 ================== */
 .contents {
-  background: var(--area-2);
+  background-color: #1b211d;
   display: flex;
   align-items: center;
   justify-content: center;
