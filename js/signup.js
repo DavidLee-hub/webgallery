@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay   = document.getElementById('signupModalOverlay');
   const closeBtn  = document.getElementById('signupModalClose');
   const submitBtn = document.getElementById('signupSubmit');
+  const nicknameEl = document.getElementById('signupNickname');
   const emailEl   = document.getElementById('signupEmail');
   const passwordEl = document.getElementById('signupPassword');
   const messageEl = document.getElementById('signupMessage');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeModal() {
     overlay.classList.remove('is-open');
+    nicknameEl.value = '';
     emailEl.value = '';
     passwordEl.value = '';
     messageEl.textContent = '';
@@ -37,11 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   submitBtn.addEventListener('click', async () => {
+    const nickname = nicknameEl.value.trim();
     const email = emailEl.value.trim();
     const password = passwordEl.value;
     messageEl.textContent = '';
     messageEl.classList.remove('is-success');
 
+    if (!nickname) {
+      messageEl.textContent = '닉네임을 입력해주세요.';
+      return;
+    }
     if (!email || !password) {
       messageEl.textContent = '이메일과 비밀번호를 입력해주세요.';
       return;
@@ -52,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     submitBtn.disabled = true;
-    const { data, error } = await _supabase.auth.signUp({ email, password });
+    const { data, error } = await _supabase.auth.signUp({ email, password, options: { data: { nickname } } });
     submitBtn.disabled = false;
 
     if (error) {
