@@ -103,6 +103,19 @@ body {
   text-decoration: underline;
   font-weight: 600;
 }
+.header__board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.header__board:hover {
+  opacity: 0.7;
+}
 /* ================== MAIN-VISUAL (600px / inner 540px) ================== */
 .main-visual {
   height: 780px;
