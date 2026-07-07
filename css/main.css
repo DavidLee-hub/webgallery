@@ -103,7 +103,14 @@ body {
   text-decoration: underline;
   font-weight: 600;
 }
-.header__board {
+.header__icon-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.header__board,
+.header__user-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +120,14 @@ body {
   flex-shrink: 0;
   transition: opacity 0.2s;
 }
-.header__board:hover {
+.header__user-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.header__board:hover,
+.header__user-link:hover {
   opacity: 0.7;
 }
 /* ================== MAIN-VISUAL (600px / inner 540px) ================== */
@@ -301,6 +315,106 @@ body {
 }
 .footer__links a:hover {
   color: #fff;
+}
+
+/* ===================== 회원가입 모달 ===================== */
+.signup-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+.signup-modal-overlay.is-open {
+  display: flex;
+}
+.signup-modal {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 36px 32px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  position: relative;
+}
+.signup-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s;
+}
+.signup-modal__close:hover {
+  color: #fff;
+}
+.signup-modal__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e0e0e0;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.signup-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.signup-modal__form input {
+  height: 44px;
+  padding: 0 14px;
+  background: #2e2e2e;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #e0e0e0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.signup-modal__form input::placeholder {
+  color: #555;
+}
+.signup-modal__form input:focus {
+  border-color: coral;
+}
+.signup-modal__submit {
+  height: 44px;
+  background: coral;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: opacity 0.2s;
+}
+.signup-modal__submit:hover {
+  opacity: 0.85;
+}
+.signup-modal__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.signup-modal__message {
+  font-size: 13px;
+  color: #e53e3e;
+  text-align: center;
+  min-height: 18px;
+}
+.signup-modal__message.is-success {
+  color: #38a169;
 }
 
 /* ===================== 반응형 ===================== */
