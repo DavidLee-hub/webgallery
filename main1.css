@@ -34,7 +34,7 @@ body {
   width: 100%;
   z-index: 100;
   height: var(--header-h);
-  /*background-color: rgba(255, 255, 255, 0.6);*/
+  -background-color: rgba(255, 255, 255, 0.6);
   border-bottom:1px solid rgba(255,255,255,0.6);
   backdrop-filter: blur(10px);
   display: flex;
@@ -51,9 +51,8 @@ body {
   gap: 24px;
 }
 .logo {
-  width: 100px;
-  height: 80px;
-  margin-top: 15px;;
+  width: 80px;
+  height: 63px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,27 +70,14 @@ body {
 .gnb ul {
   list-style: none;
   display: flex;
-  gap: 56px;
+  gap: 28px; 
   padding: 14px 36px;
-}
-.gnb ul li:not(:last-child) {
-  position: relative;
-}
-.gnb ul li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -28px;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.6);
 }
 .gnb a {
   text-decoration: none;
-  color: #fff;
+  color:#fff;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -99,15 +85,23 @@ body {
   text-decoration: underline;
   text-decoration-thickness: 1px;
 }
-.gnb a.active {
-  text-decoration: underline;
-  font-weight: 600;
+.sns {
+  display: flex;
+  gap: 18px;
+  align-items: center;  
+  padding: 12px 22px;
 }
+.sns a {
+  color: var(--ink);
+  font-size: 18px;
+  text-decoration: none;
+}
+
 /* ================== MAIN-VISUAL (600px / inner 540px) ================== */
 .main-visual {
   height: 780px;
   background: var(--area-2);
-  display: flex;
+  -display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -154,7 +148,11 @@ body {
 
 /* ================== CONTENTS 공통 ================== */
 .contents {
-  background-color: #1b211d;
+  -background: var(--area-2);
+	background:#0d0d0d;
+	background:#EDEAE4;
+	background:#12181C;
+	background:#1B211D;
   display: flex;
   align-items: center;
   justify-content: center;
